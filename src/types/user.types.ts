@@ -1,6 +1,5 @@
 export enum VerifyStatus {
-  UnVerified,
-  Verified,
+  Actived,
   Banned,
 }
 

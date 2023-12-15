@@ -1,16 +1,23 @@
-import { useAppDispatch } from "@/store";
-import { Header as HeaderStyle } from "./Header.styles";
-import { Button } from "@/components";
-import { logout } from "@/store/slices/authSlice";
+import { useAppSelector } from "@/store";
+import { Header as HeaderStyle, Info, Profile } from "./Header.styles";
+import { Avatar } from "antd";
+import { ArrowDown2 } from "iconsax-react";
 
 export const Header = () => {
-  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
 
   return (
     <HeaderStyle>
-      <Button type="text" onClick={() => dispatch(logout())}>
-        Logout
-      </Button>
+      <Profile>
+        <Avatar src={user?.avatar} size={40}>
+          {user?.name.charAt(0)}
+        </Avatar>
+        <Info>
+          <h4>{user?.name}</h4>
+          <span>{user?.email}</span>
+        </Info>
+        <ArrowDown2 size="20" />
+      </Profile>
     </HeaderStyle>
   );
 };

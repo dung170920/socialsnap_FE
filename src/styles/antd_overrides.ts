@@ -13,6 +13,10 @@ export function overridesAntd(theme: DefaultTheme) {
       colorBgBase: theme.colors.card,
       colorBorder: theme.colors.border,
       boxShadow: theme.boxShadow.primary,
+      colorError: theme.colors.error,
+      colorWarning: theme.colors.warning,
+      colorSuccess: theme.colors.success,
+      colorInfo: theme.colors.info,
     },
     components: {
       Input: {

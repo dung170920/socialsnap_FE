@@ -13,10 +13,10 @@ declare module "styled-components" {
       card: string;
       text: string;
       border: string;
-      // info: string;
-      // warning: string;
-      // error: string;
-      // success: string;
+      info: string;
+      warning: string;
+      error: string;
+      success: string;
     };
   }
 }

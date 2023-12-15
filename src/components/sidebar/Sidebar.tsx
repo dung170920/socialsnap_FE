@@ -1,10 +1,10 @@
-import { Logo } from "@/components";
-import { ArrowLeft } from "iconsax-react";
-import { CollapseButton, Info, Profile, Sider } from "./Sidebar.styles";
-import { Avatar, Divider, Menu } from "antd";
+import { Logo, Menu } from "@/components";
+import { ArrowLeft, LogoutCurve } from "iconsax-react";
+import { CollapseButton, Sider } from "./Sidebar.styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SIDEBAR_LINKS } from "@/constants";
-import { useAppSelector } from "@/store";
+import { useAppDispatch } from "@/store";
+import { logout } from "@/store/slices/authSlice";
 
 export interface Props {
   collapsed: boolean;
@@ -12,7 +12,7 @@ export interface Props {
 }
 
 export const Sidebar = ({ collapsed = false, setCollapsed }: Props) => {
-  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -24,28 +24,31 @@ export const Sidebar = ({ collapsed = false, setCollapsed }: Props) => {
           padding: "16px 18px",
         }}
       />
-      <Profile>
-        <Avatar src={user?.avatar} size={48}>
-          {user?.name.charAt(0)}
-        </Avatar>
-        <Info>
-          <h4>{user?.name}</h4>
-          <span>{user?.email}</span>
-        </Info>
-      </Profile>
-      <Divider />
       <Menu
-        mode="inline"
         selectedKeys={[pathname]}
-        onClick={(e) => navigate(e.key)}
-        items={SIDEBAR_LINKS.map((e) => {
-          return {
-            key: e.key,
-            label: e.title,
-            title: e.title,
-            icon: <e.icon size={24} variant={e.key === pathname ? "Bold" : "Linear"} />,
-          };
-        })}
+        onClick={(e) => {
+          if (e.key !== "logout") {
+            navigate(e.key);
+          } else {
+            dispatch(logout());
+          }
+        }}
+        items={[
+          ...SIDEBAR_LINKS.map((e) => {
+            return {
+              key: e.key,
+              label: e.title,
+              title: e.title,
+              icon: <e.icon size={24} variant={e.key === pathname ? "Bulk" : "TwoTone"} />,
+            };
+          }),
+          {
+            key: "logout",
+            danger: true,
+            label: "Logout",
+            icon: <LogoutCurve variant="TwoTone" />,
+          },
+        ]}
       />
       <CollapseButton $collapsed={collapsed} onClick={() => setCollapsed(!collapsed)}>
         <ArrowLeft size={16} />

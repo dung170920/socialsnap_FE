@@ -20,6 +20,10 @@ const lightColors: DefaultTheme["colors"] = {
   card: COLORS.white,
   text: COLORS.neutral[900],
   border: COLORS.neutral[400],
+  info: "#4D67EB",
+  success: "#59CC3D",
+  warning: "#ECA214",
+  error: "#FF5347",
 };
 
 const darkColors = {
@@ -29,4 +33,8 @@ const darkColors = {
   card: COLORS.neutral[800],
   text: COLORS.white,
   border: COLORS.neutral[700],
+  info: "#384DCA",
+  success: "#3CAF2C",
+  warning: "#D17C0E",
+  error: "#DB3336",
 };
