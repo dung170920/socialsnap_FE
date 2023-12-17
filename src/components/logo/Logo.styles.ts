@@ -1,17 +1,18 @@
-import styled from "styled-components";
+import { createStyles } from "antd-style";
 
-export const Wrapper = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-
-  svg {
-    flex-shrink: 0;
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
-  span {
+export const useStyles = createStyles(({ token, css }) => ({
+  wrapper: {
+    display: "flex",
+    gap: "12px",
+    alignItems: "center",
+  },
+  label: css`
     font-size: 20px;
     font-weight: 700;
-  }
-`;
+    color: ${token.colorText};
+  `,
+  icon: css`
+    flex-shrink: 0;
+    color: ${token.colorPrimary};
+  `,
+}));

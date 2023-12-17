@@ -1,40 +1,23 @@
-import styled, { css } from "styled-components";
-import { Input as AntInput, Form } from "antd";
+import { createStyles } from "antd-style";
 
-export const FormItem = styled(Form.Item)`
-  margin-top: 4px;
-  font-weight: 500;
-  width: 100%;
-`;
+export const useStyles = createStyles(({ css, token }) => ({
+  item: {
+    marginTop: "4px",
+    fontWeight: 500,
+    width: "100%",
+  },
 
-export const Input = styled(AntInput)`
-  margin-bottom: 4px;
+  input: css`
+    border-radius: ${token.borderRadius}px;
+    margin-bottom: 4px;
+    font-size: 14px;
+  `,
 
-  ${({ size }) => css`
-    ${size === "middle" &&
-    css`
-      padding: 8px 16px;
-    `}
+  inputMd: {
+    padding: "8px 16px",
+  },
 
-    ${size === "large" &&
-    css`
-      padding: 12px 16px;
-    `}
-  `}
-`;
-
-export const InputPassword = styled(AntInput.Password)`
-  margin-bottom: 4px;
-
-  ${({ size }) => css`
-    ${size === "middle" &&
-    css`
-      padding: 8px 16px;
-    `}
-
-    ${size === "large" &&
-    css`
-      padding: 12px 16px;
-    `}
-  `}
-`;
+  inputLg: {
+    padding: "12px 16px",
+  },
+}));

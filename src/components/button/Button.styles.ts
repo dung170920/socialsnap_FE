@@ -1,26 +1,19 @@
-import styled, { css } from "styled-components";
-import { Button as AntButton } from "antd";
-import { IButtonProps } from "./Button";
+import { createStyles } from "antd-style";
 
-export const Button = styled(AntButton)<IButtonProps>`
-  height: 48px;
-  box-shadow: none;
-  font-weight: 500;
+export const useStyles = createStyles(() => ({
+  button: {
+    fontSize: "16px",
+    height: "48px",
+    boxShadow: "none",
+    fontWeight: 500,
+  },
 
-  &.ant-btn-lg {
-    font-size: 16px;
-    height: 56px;
-  }
+  buttonLg: {
+    height: "56px",
+  },
 
-  &.ant-btn-sm {
-    font-size: 16px;
-    height: 40px;
-  }
-
-  ${({ type, theme }) => css`
-    ${type === "primary" &&
-    css`
-      //background-color: ${theme.primary};
-    `}
-  `}
-`;
+  buttonSm: {
+    fontSize: "14px",
+    height: "40px",
+  },
+}));

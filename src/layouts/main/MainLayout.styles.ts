@@ -1,11 +1,14 @@
-import { Layout } from "antd";
-import styled from "styled-components";
+import { createStyles } from "antd-style";
 
-export const MainWrapper = styled(Layout)`
-  height: 100vh;
-`;
+export const useStyles = createStyles(({ token, css }) => ({
+  wrapper: {
+    height: "100vh",
+  },
 
-export const Content = styled(Layout.Content)`
-  overflow: auto;
-  padding: 32px;
-`;
+  content: css`
+    overflow: auto;
+    padding: 32px;
+    background-color: ${token.colorBgContainer};
+    color: ${token.colorText};
+  `,
+}));

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Menu as AntMenu } from "antd";
 import { IMenuProps } from "..";
-import { COLORS } from "@/constants";
 
 export const Menu = styled(AntMenu)<IMenuProps>`
   overflow: hidden;
@@ -23,19 +22,12 @@ export const Menu = styled(AntMenu)<IMenuProps>`
     align-items: center;
     line-height: 48px;
     height: 48px;
-    color: ${COLORS.neutral[500]};
-
-    &-danger {
-      color: ${({ theme }) => theme.colors.error};
-    }
 
     a {
       transition: none;
     }
 
     &.ant-menu-item-selected {
-      color: ${COLORS.primary};
-
       a:hover {
         filter: brightness(1);
       }

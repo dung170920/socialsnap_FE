@@ -1,4 +1,4 @@
-import { PATH } from "@/constants";
+import { path } from "@/constants";
 import { AuthLayout, MainLayout } from "@/layouts";
 import { useAppSelector } from "@/store";
 import React, { Suspense } from "react";
@@ -20,7 +20,7 @@ const Loadable = () => (
 const RequireAuth = ({ children }: { children: React.ReactNode }) => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
 
-  return accessToken ? <>{children}</> : <Navigate to={PATH.signIn} replace />;
+  return accessToken ? <>{children}</> : <Navigate to={path.signIn} replace />;
 };
 
 export const Router = () => {
@@ -28,9 +28,9 @@ export const Router = () => {
     <Routes>
       <Route element={<Loadable />}>
         <Route element={<AuthLayout />}>
-          <Route index path={PATH.signIn} element={<SignIn />} />
-          <Route path={PATH.signUp} element={<SignUp />} />
-          {/* <Route path="*" element={<Navigate to={PATH.signIn} replace />} /> */}
+          <Route index path={path.signIn} element={<SignIn />} />
+          <Route path={path.signUp} element={<SignUp />} />
+          {/* <Route path="*" element={<Navigate to={path.signIn} replace />} /> */}
         </Route>
         <Route
           element={
@@ -39,10 +39,10 @@ export const Router = () => {
             </RequireAuth>
           }
         >
-          <Route path={PATH.home} element={<Home />} />
-          <Route path={PATH.explore} element={<Explore />} />
-          <Route path={PATH.bookmarks} element={<Bookmarks />} />
-          <Route path={PATH.createPost} element={<CreatePost />} />
+          <Route path={path.home} element={<Home />} />
+          <Route path={path.explore} element={<Explore />} />
+          <Route path={path.bookmarks} element={<Bookmarks />} />
+          <Route path={path.createPost} element={<CreatePost />} />
           <Route path="*" element={<div />} />
         </Route>
       </Route>

@@ -1,5 +1,17 @@
 import { DefaultTheme } from "styled-components";
-import { COLORS } from "@/constants";
+
+const neutral = {
+  0: "#ffffff",
+  100: "#fafafa",
+  200: "#FCFCFC",
+  300: "#F4F4F4",
+  400: "#EFEFEF",
+  500: "#6F767E",
+  600: "#33383F",
+  700: "#272B30",
+  800: "#1A1D1F",
+  900: "#111315",
+};
 
 export function getTheme(mode: string) {
   const myTheme: DefaultTheme = {
@@ -14,12 +26,12 @@ export function getTheme(mode: string) {
 }
 
 const lightColors: DefaultTheme["colors"] = {
-  primary: COLORS.primary,
-  scrollbar: COLORS.neutral[500],
-  background: COLORS.neutral[300],
-  card: COLORS.white,
-  text: COLORS.neutral[900],
-  border: COLORS.neutral[400],
+  primary: "#7065F0",
+  scrollbar: neutral[500],
+  background: neutral[300],
+  card: neutral[0],
+  text: neutral[900],
+  border: neutral[400],
   info: "#4D67EB",
   success: "#59CC3D",
   warning: "#ECA214",
@@ -27,14 +39,14 @@ const lightColors: DefaultTheme["colors"] = {
 };
 
 const darkColors = {
-  primary: COLORS.primary,
-  scrollbar: COLORS.neutral[100],
-  background: COLORS.neutral[900],
-  card: COLORS.neutral[800],
-  text: COLORS.white,
-  border: COLORS.neutral[700],
-  info: "#384DCA",
-  success: "#3CAF2C",
-  warning: "#D17C0E",
-  error: "#DB3336",
+  primary: "#7065F0",
+  scrollbar: neutral[100],
+  background: neutral[900],
+  card: neutral[800],
+  text: neutral[0],
+  border: neutral[700],
+  info: "",
+  success: "",
+  warning: "",
+  error: "",
 };

@@ -1,16 +1,17 @@
 import { Camera } from "iconsax-react";
-import { Wrapper } from "./Logo.styles";
-import React from "react";
+import { useStyles } from "./Logo.styles";
+import { CSSProperties } from "react";
 
 interface Props {
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export const Logo = ({ style }: Props) => {
+  const { styles } = useStyles();
   return (
-    <Wrapper style={style}>
-      <Camera size="36" />
-      <span>Socialsnap</span>
-    </Wrapper>
+    <div className={styles.wrapper} style={style}>
+      <Camera size="36" className={styles.icon} />
+      <span className={styles.label}>Socialsnap</span>
+    </div>
   );
 };

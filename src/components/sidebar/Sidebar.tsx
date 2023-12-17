@@ -1,10 +1,11 @@
 import { Logo, Menu } from "@/components";
 import { ArrowLeft, LogoutCurve } from "iconsax-react";
-import { CollapseButton, Sider } from "./Sidebar.styles";
+import { useStyles } from "./Sidebar.styles";
 import { useLocation, useNavigate } from "react-router-dom";
-import { SIDEBAR_LINKS } from "@/constants";
+import { sidebarLinks } from "@/constants";
 import { useAppDispatch } from "@/store";
 import { logout } from "@/store/slices/authSlice";
+import { Layout } from "antd";
 
 export interface Props {
   collapsed: boolean;
@@ -12,12 +13,13 @@ export interface Props {
 }
 
 export const Sidebar = ({ collapsed = false, setCollapsed }: Props) => {
+  const { styles } = useStyles({ collapsed });
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed} width={260}>
+    <Layout.Sider className={styles.sidebar} trigger={null} collapsible collapsed={collapsed} width={260}>
       <Logo
         style={{
           overflow: "hidden",
@@ -34,7 +36,7 @@ export const Sidebar = ({ collapsed = false, setCollapsed }: Props) => {
           }
         }}
         items={[
-          ...SIDEBAR_LINKS.map((e) => {
+          ...sidebarLinks.map((e) => {
             return {
               key: e.key,
               label: e.title,
@@ -50,9 +52,9 @@ export const Sidebar = ({ collapsed = false, setCollapsed }: Props) => {
           },
         ]}
       />
-      <CollapseButton $collapsed={collapsed} onClick={() => setCollapsed(!collapsed)}>
-        <ArrowLeft size={16} />
-      </CollapseButton>
-    </Sider>
+      <button className={styles.collapseButton} onClick={() => setCollapsed(!collapsed)}>
+        <ArrowLeft size={16} variant="TwoTone" />
+      </button>
+    </Layout.Sider>
   );
 };

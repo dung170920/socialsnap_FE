@@ -1,18 +1,16 @@
-import { ConfigProvider } from "antd";
 import { Router } from "@/routes";
-import GlobalStyle from "@/styles/global";
-import { ThemeProvider } from "styled-components";
-import { overridesAntd, getTheme } from "@/styles";
+import { darkTheme, lightTheme } from "@/styles";
+import { useAppSelector } from "@/store";
+import { ThemeProvider } from "antd-style";
+import Global from "./styles/global";
 
 function App() {
-  const theme = "light";
+  const { theme } = useAppSelector((state) => state.setting);
 
   return (
-    <ThemeProvider theme={getTheme(theme)}>
-      <GlobalStyle />
-      <ConfigProvider theme={overridesAntd(getTheme(theme))}>
-        <Router />
-      </ConfigProvider>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <Global />
+      <Router />
     </ThemeProvider>
   );
 }

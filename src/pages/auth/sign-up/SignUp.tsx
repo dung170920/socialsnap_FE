@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Body, Buttons } from "./SignUp.styles";
+import { useStyles } from "./SignUp.styles";
 import { Button, Input } from "@/components";
 import { Link, useNavigate } from "react-router-dom";
-import { PATH } from "@/constants";
+import { path } from "@/constants";
 import { RegisterRequest } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { register } from "@/store/slices/authSlice";
+import { Form } from "antd";
 
 const schema = yup.object().shape({
   name: yup.string().required("Fullname is a required field").min(1).max(40),
@@ -34,6 +35,7 @@ const defaultValues = {
 };
 
 const SignUp = () => {
+  const { styles } = useStyles();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const loading = useAppSelector((state) => state.auth.loading) as boolean;
@@ -55,7 +57,7 @@ const SignUp = () => {
   });
 
   return (
-    <Body layout="vertical" onFinish={onSubmit}>
+    <Form className={styles.body} layout="vertical" onFinish={onSubmit}>
       <Input control={control} placeholder="Enter your full name" name="name" label="Full Name" />
       <Input control={control} placeholder="Enter your email" name="email" label="Email" />
       <Input control={control} placeholder="Enter your password" name="password" label="Password" isPassword />
@@ -66,15 +68,15 @@ const SignUp = () => {
         label="Confirm Password"
         isPassword
       />
-      <Buttons>
+      <div className={styles.buttons}>
         <Button type="primary" block htmlType="submit" loading={loading}>
-          Sign up
+          Sign Up
         </Button>
         <p>
-          Already have an account? <Link to={PATH.signIn}>Sign in</Link>
+          Already have an account? <Link to={path.signIn}>Sign in</Link>
         </p>
-      </Buttons>
-    </Body>
+      </div>
+    </Form>
   );
 };
 

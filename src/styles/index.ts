@@ -1,4 +1,3 @@
-export * from "./antd_overrides";
+export * from "./antd_config";
 export * from "./global";
-export * from "./reset";
 export * from "./theme";

@@ -1,6 +1,6 @@
-import { InputProps } from "antd";
-import * as S from "./Input.styles";
+import { Form, InputProps, Input as AntdInput } from "antd";
 import { Controller, FieldPath, FieldValues } from "react-hook-form";
+import { useStyles } from "./Input.styles";
 
 export type IInputProps<T extends FieldValues> = {
   isPassword?: boolean;
@@ -12,25 +12,33 @@ export type IInputProps<T extends FieldValues> = {
 export const Input = ({
   isPassword = false,
   label,
-  name,
   placeholder,
-  control,
   size = "large",
+  control,
+  name,
   ...props
 }: IInputProps<FieldValues>) => {
+  const { styles, cx } = useStyles();
+  const inputStyle = cx(styles.input, size === "large" && styles.inputLg, size === "middle" && styles.inputMd);
+
   return (
     <Controller
       control={control}
       name={name}
       {...props}
       render={({ field: { value, onChange }, fieldState: { error } }) => (
-        <S.FormItem label={label} validateStatus={error?.message && "error"} help={error?.message}>
+        <Form.Item
+          className={styles.item}
+          label={label}
+          validateStatus={error?.message && "error"}
+          help={error?.message}
+        >
           {isPassword ? (
-            <S.InputPassword size={size} placeholder={placeholder} value={value} onChange={onChange} />
+            <AntdInput.Password className={inputStyle} placeholder={placeholder} value={value} onChange={onChange} />
           ) : (
-            <S.Input size={size} placeholder={placeholder} value={value} onChange={onChange} />
+            <AntdInput className={inputStyle} placeholder={placeholder} value={value} onChange={onChange} />
           )}
-        </S.FormItem>
+        </Form.Item>
       )}
     />
   );

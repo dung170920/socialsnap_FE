@@ -1,24 +1,24 @@
 import { Home, LocationDiscover, Bookmark, Additem } from "iconsax-react";
-import { PATH } from ".";
+import { path } from ".";
 
-export const SIDEBAR_LINKS = [
+export const sidebarLinks = [
   {
-    key: PATH.home,
+    key: path.home,
     title: "Home",
     icon: Home,
   },
   {
-    key: PATH.explore,
+    key: path.explore,
     title: "Explore",
     icon: LocationDiscover,
   },
   {
-    key: PATH.bookmarks,
+    key: path.bookmarks,
     title: "Bookmarks",
     icon: Bookmark,
   },
   {
-    key: PATH.createPost,
+    key: path.createPost,
     title: "Create Post",
     icon: Additem,
   },

@@ -1,14 +1,18 @@
-import { ButtonProps } from "antd";
-import * as S from "./Button.styles";
+import { ButtonProps, Button as AntdButton } from "antd";
+import { useStyles } from "./Button.styles";
 
 export interface IButtonProps extends ButtonProps {
   children: React.ReactNode;
 }
 
 export const Button = ({ size = "middle", children, ...props }: IButtonProps) => {
+  const { styles, cx } = useStyles();
   return (
-    <S.Button size={size} {...props}>
+    <AntdButton
+      className={cx(styles.button, size === "large" && styles.buttonLg, size === "small" && styles.buttonSm)}
+      {...props}
+    >
       {children}
-    </S.Button>
+    </AntdButton>
   );
 };
