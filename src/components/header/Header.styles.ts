@@ -1,5 +1,4 @@
 import { createStyles } from "antd-style";
-import styled from "styled-components";
 
 export const useStyles = createStyles(({ token, css }) => ({
   header: css`
@@ -12,36 +11,37 @@ export const useStyles = createStyles(({ token, css }) => ({
     border: 1px solid ${token.colorBorder};
     border-left: 0;
   `,
+
+  profile: {
+    maxWidth: "220px",
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+
+  avatar: {
+    flexShrink: 0,
+  },
+
+  info: css`
+    line-height: 1;
+    flex: 1;
+    overflow: hidden;
+
+    h4 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+      font-size: 12px;
+    }
+  `,
 }));
-
-export const Profile = styled.div`
-  max-width: 220px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  .ant-avatar {
-    flex-shrink: 0;
-  }
-`;
-
-export const Info = styled.div`
-  line-height: 1;
-  flex: 1;
-  overflow: hidden;
-
-  h4 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-  span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-    font-size: 12px;
-  }
-`;

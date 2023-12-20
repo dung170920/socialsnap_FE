@@ -1,8 +1,9 @@
-import { MenuProps } from "antd";
-import * as S from "./Menu.styles";
+import { Menu as AntdMenu, MenuProps } from "antd";
+import { useStyles } from "./Menu.styles";
 
 export interface IMenuProps extends MenuProps {}
 
 export const Menu = ({ ...props }: IMenuProps) => {
-  return <S.Menu mode="inline" {...props} />;
+  const { styles } = useStyles();
+  return <AntdMenu className={styles.menu} mode="inline" {...props} />;
 };

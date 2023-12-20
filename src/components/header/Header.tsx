@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store";
-import { Info, Profile, useStyles } from "./Header.styles";
+import { useStyles } from "./Header.styles";
 import { Avatar, Button, Layout } from "antd";
 import { ArrowDown2 } from "iconsax-react";
 import { setTheme } from "@/store/slices/settingSlice";
@@ -13,16 +13,16 @@ export const Header = () => {
   return (
     <Layout.Header className={styles.header}>
       <Button onClick={() => dispatch(setTheme(theme === "light" ? "dark" : "light"))}>Theme: {theme}</Button>
-      <Profile>
-        <Avatar src={user?.avatar} size={40}>
+      <div className={styles.profile}>
+        <Avatar className={styles.avatar} src={user?.avatar} size={40}>
           {user?.name.charAt(0)}
         </Avatar>
-        <Info>
+        <div className={styles.info}>
           <h4>{user?.name}</h4>
           <span>{user?.email}</span>
-        </Info>
+        </div>
         <ArrowDown2 size="20" />
-      </Profile>
+      </div>
     </Layout.Header>
   );
 };
