@@ -1,4 +1,4 @@
-import { Home, LocationDiscover, Bookmark, Additem } from "iconsax-react";
+import { Home, LocationDiscover, Bookmark, Additem, User } from "iconsax-react";
 import { path } from ".";
 
 export const sidebarLinks = [
@@ -21,5 +21,13 @@ export const sidebarLinks = [
     key: path.createPost,
     title: "Create Post",
     icon: Additem,
+  },
+];
+
+export const profilePopoverLinks = [
+  {
+    key: path.profile,
+    title: "Profile",
+    icon: User,
   },
 ];

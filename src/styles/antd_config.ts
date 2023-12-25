@@ -19,6 +19,7 @@ export const lightTheme: ThemeConfig = {
     colorWarning: themeVariables.colors.warning,
     colorSuccess: themeVariables.colors.success,
     colorInfo: themeVariables.colors.info,
+    colorSplit: themeVariables.colors.neutral[400],
   },
   // components: {
   //   Button: {},
@@ -51,6 +52,7 @@ export const darkTheme: ThemeConfig = {
     colorWarning: themeVariables.colors.warning,
     colorSuccess: themeVariables.colors.success,
     colorInfo: themeVariables.colors.info,
+    colorSplit: themeVariables.colors.neutral[700],
   },
   // components: {
   //   Button: {},

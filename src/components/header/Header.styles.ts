@@ -16,7 +16,9 @@ export const useStyles = createStyles(({ token, css }) => ({
     maxWidth: "220px",
     display: "flex",
     alignItems: "center",
+    justifyContent: "start",
     gap: "12px",
+    cursor: "pointer",
   },
 
   avatar: {
@@ -44,4 +46,8 @@ export const useStyles = createStyles(({ token, css }) => ({
       font-size: 12px;
     }
   `,
+
+  popoverContent: {
+    width: 260,
+  },
 }));

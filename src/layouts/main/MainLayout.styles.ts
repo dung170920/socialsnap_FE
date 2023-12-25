@@ -6,8 +6,7 @@ export const useStyles = createStyles(({ token, css }) => ({
   },
 
   content: css`
-    overflow: auto;
-    padding: 32px;
+    padding: 40px;
     background-color: ${token.colorBgContainer};
     color: ${token.colorText};
   `,

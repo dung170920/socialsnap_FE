@@ -41,6 +41,7 @@ export default createGlobalStyle`
   textarea {
     background-color: transparent;
     outline: none;
+    border: none;
   }
   button {
     cursor: pointer;

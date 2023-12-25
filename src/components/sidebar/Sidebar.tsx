@@ -1,5 +1,5 @@
 import { Logo, Menu } from "@/components";
-import { ArrowLeft, LogoutCurve } from "iconsax-react";
+import { ArrowLeft } from "iconsax-react";
 import { useStyles } from "./Sidebar.styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sidebarLinks } from "@/constants";
@@ -35,22 +35,14 @@ export const Sidebar = ({ collapsed = false, setCollapsed }: Props) => {
             dispatch(logout());
           }
         }}
-        items={[
-          ...sidebarLinks.map((e) => {
-            return {
-              key: e.key,
-              label: e.title,
-              title: e.title,
-              icon: <e.icon size={24} variant={e.key === pathname ? "Bulk" : "TwoTone"} />,
-            };
-          }),
-          {
-            key: "logout",
-            danger: true,
-            label: "Logout",
-            icon: <LogoutCurve variant="TwoTone" />,
-          },
-        ]}
+        items={sidebarLinks.map((e) => {
+          return {
+            key: e.key,
+            label: e.title,
+            title: e.title,
+            icon: <e.icon size={24} variant={e.key === pathname ? "Bulk" : "TwoTone"} />,
+          };
+        })}
       />
       <button className={styles.collapseButton} onClick={() => setCollapsed(!collapsed)}>
         <ArrowLeft size={16} variant="TwoTone" />
