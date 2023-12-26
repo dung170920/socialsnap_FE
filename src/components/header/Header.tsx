@@ -1,11 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useStyles } from "./Header.styles";
-import { Avatar, Dropdown, Layout, MenuProps } from "antd";
-import { ArrowDown2, LogoutCurve, Moon } from "iconsax-react";
+import { Avatar, Layout, MenuProps } from "antd";
+import { ArrowDown2, LogoutCurve, Moon, Sun1, User } from "iconsax-react";
 import { setTheme } from "@/store/slices/settingSlice";
-import { profilePopoverLinks } from "@/constants";
+import { path } from "@/constants";
 import { logout } from "@/store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { Dropdown } from "@/components";
 
 export const Header = () => {
   const { styles } = useStyles();
@@ -15,20 +16,27 @@ export const Header = () => {
   const navigate = useNavigate();
 
   const items: MenuProps["items"] = [
-    ...profilePopoverLinks.map((e) => {
-      return {
-        key: e.key,
-        label: e.title,
-        icon: <e.icon size={24} />,
-        onClick: () => navigate(e.key),
-      };
-    }),
+    {
+      key: path.user,
+      label: "Profile",
+      icon: <User />,
+      onClick: () => navigate(`/${user?.id}`),
+    },
     { type: "divider" },
     {
-      key: "theme",
-      label: "Dark mode",
-      icon: <Moon size={24} />,
-      onClick: () => dispatch(setTheme(theme === "light" ? "dark" : "light")),
+      ...(theme === "light"
+        ? {
+            key: "theme",
+            label: "Dark mode",
+            icon: <Moon />,
+            onClick: () => dispatch(setTheme("dark")),
+          }
+        : {
+            key: "theme",
+            label: "Light mode",
+            icon: <Sun1 />,
+            onClick: () => dispatch(setTheme("light")),
+          }),
     },
     { type: "divider" },
     {
@@ -42,7 +50,7 @@ export const Header = () => {
 
   return (
     <Layout.Header className={styles.header}>
-      <Dropdown menu={{ items }} trigger={["click"]} className={styles.popoverContent}>
+      <Dropdown menu={{ items }} trigger={["click"]}>
         <div className={styles.profile}>
           <Avatar className={styles.avatar} src={user?.avatar} size={40}>
             {user?.name.charAt(0)}

@@ -46,8 +46,4 @@ export const useStyles = createStyles(({ token, css }) => ({
       font-size: 12px;
     }
   `,
-
-  popoverContent: {
-    width: 260,
-  },
 }));

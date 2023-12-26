@@ -9,6 +9,7 @@ const SignUp = React.lazy(() => import("@/pages/auth/sign-up/SignUp"));
 const Home = React.lazy(() => import("@/pages/home/Home"));
 const Explore = React.lazy(() => import("@/pages/explore/Explore"));
 const Bookmarks = React.lazy(() => import("@/pages/bookmarks/Bookmarks"));
+const User = React.lazy(() => import("@/pages/user/User"));
 const CreatePost = React.lazy(() => import("@/pages/create-post/CreatePost"));
 
 const Loadable = () => (
@@ -42,6 +43,7 @@ export const Router = () => {
           <Route path={path.home} element={<Home />} />
           <Route path={path.explore} element={<Explore />} />
           <Route path={path.bookmarks} element={<Bookmarks />} />
+          <Route path={path.user} element={<User />} />
           <Route path={path.createPost} element={<CreatePost />} />
           <Route path="*" element={<div />} />
         </Route>

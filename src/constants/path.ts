@@ -5,5 +5,5 @@ export const path = {
   explore: "/explore",
   bookmarks: "/bookmarks",
   createPost: "/create-post",
-  profile: "/:id",
+  user: "/:userId",
 };
