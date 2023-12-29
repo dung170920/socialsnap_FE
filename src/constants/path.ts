@@ -4,6 +4,6 @@ export const path = {
   home: "/",
   explore: "/explore",
   bookmarks: "/bookmarks",
-  createPost: "/create-post",
-  user: "/:userId",
+  user: "/user",
+  notFound: "/not-found",
 };

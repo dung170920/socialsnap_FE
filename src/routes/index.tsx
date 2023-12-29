@@ -1,6 +1,7 @@
 import { path } from "@/constants";
 import { AuthLayout, MainLayout } from "@/layouts";
 import { useAppSelector } from "@/store";
+import { Spin } from "antd";
 import React, { Suspense } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 
@@ -10,43 +11,38 @@ const Home = React.lazy(() => import("@/pages/home/Home"));
 const Explore = React.lazy(() => import("@/pages/explore/Explore"));
 const Bookmarks = React.lazy(() => import("@/pages/bookmarks/Bookmarks"));
 const User = React.lazy(() => import("@/pages/user/User"));
-const CreatePost = React.lazy(() => import("@/pages/create-post/CreatePost"));
+const NotFound = React.lazy(() => import("@/pages/not-found/NotFound"));
 
 const Loadable = () => (
-  <Suspense fallback={<div>loading</div>}>
+  <Suspense fallback={<Spin fullscreen />}>
     <Outlet />
   </Suspense>
 );
 
-const RequireAuth = ({ children }: { children: React.ReactNode }) => {
-  const accessToken = useAppSelector((state) => state.auth.accessToken);
-
-  return accessToken ? <>{children}</> : <Navigate to={path.signIn} replace />;
-};
-
 export const Router = () => {
+  const { accessToken } = useAppSelector((state) => state.auth.data);
+
   return (
     <Routes>
-      <Route element={<Loadable />}>
-        <Route element={<AuthLayout />}>
-          <Route index path={path.signIn} element={<SignIn />} />
-          <Route path={path.signUp} element={<SignUp />} />
-          {/* <Route path="*" element={<Navigate to={path.signIn} replace />} /> */}
-        </Route>
-        <Route
-          element={
-            <RequireAuth>
-              <MainLayout />
-            </RequireAuth>
-          }
-        >
-          <Route path={path.home} element={<Home />} />
-          <Route path={path.explore} element={<Explore />} />
-          <Route path={path.bookmarks} element={<Bookmarks />} />
-          <Route path={path.user} element={<User />} />
-          <Route path={path.createPost} element={<CreatePost />} />
-          <Route path="*" element={<div />} />
-        </Route>
+      <Route path="/" element={<Loadable />}>
+        {accessToken ? (
+          <Route element={<MainLayout />}>
+            <Route path={path.home} element={<Home />} />
+            <Route path={path.explore} element={<Explore />} />
+            <Route path={path.bookmarks} element={<Bookmarks />} />
+            <Route path={path.user}>
+              <Route index element={<Navigate to={path.notFound} replace />} />
+              <Route path=":userId" element={<User />} />
+            </Route>
+            <Route path="*" element={<Navigate to={path.notFound} replace />} />
+          </Route>
+        ) : (
+          <Route element={<AuthLayout />}>
+            <Route path={path.signIn} element={<SignIn />} />
+            <Route path={path.signUp} element={<SignUp />} />
+          </Route>
+        )}
+        <Route path={path.notFound} element={<NotFound />} />
       </Route>
     </Routes>
   );

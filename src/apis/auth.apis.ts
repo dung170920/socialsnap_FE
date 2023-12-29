@@ -1,12 +1,12 @@
 import { AuthResponse, LoginRequest, RegisterRequest } from "@/types";
 import { api } from ".";
 
-const authpath = "auth/";
+const path = "auth/";
 
-export async function loginApi(loginPayload: LoginRequest) {
-  return api.post<AuthResponse>(`${authpath}login`, loginPayload);
+export async function loginApi(payload: LoginRequest) {
+  return api.post<AuthResponse>(`${path}login`, payload);
 }
 
-export async function registerApi(loginPayload: RegisterRequest) {
-  return api.post<AuthResponse>(`${authpath}register`, loginPayload);
+export async function registerApi(payload: RegisterRequest) {
+  return api.post<AuthResponse>(`${path}register`, payload);
 }

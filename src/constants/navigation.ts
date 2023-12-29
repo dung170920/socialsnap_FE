@@ -1,4 +1,4 @@
-import { Home, LocationDiscover, Bookmark, Additem } from "iconsax-react";
+import { Home, LocationDiscover, Bookmark } from "iconsax-react";
 import { path } from ".";
 
 export const sidebarLinks = [
@@ -16,10 +16,5 @@ export const sidebarLinks = [
     key: path.bookmarks,
     title: "Bookmarks",
     icon: Bookmark,
-  },
-  {
-    key: path.createPost,
-    title: "Create Post",
-    icon: Additem,
   },
 ];

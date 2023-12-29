@@ -1,6 +1,6 @@
 export const themeVariables = {
   fontFamily: "'Poppins', sans-serif",
-  borderRadius: 8,
+  borderRadius: 16,
   boxShadow: {
     primary: {
       light: "0px 12px 13px -6px rgba(0, 0, 0, 0.04)",

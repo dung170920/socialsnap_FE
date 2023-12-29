@@ -5,10 +5,9 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const persistConfig = {
-  key: "root",
+const settingPersistConfig = {
+  key: "setting",
   storage,
-  whitelist: ["user", "setting"],
 };
 
 const authPersistConfig = {
@@ -17,10 +16,8 @@ const authPersistConfig = {
   blacklist: ["loading"],
 };
 
-const reducers = combineReducers({
+export const reducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   user: userReducer,
-  setting: settingReducer,
+  setting: persistReducer(settingPersistConfig, settingReducer),
 });
-
-export const persistedReducer = persistReducer(persistConfig, reducers);

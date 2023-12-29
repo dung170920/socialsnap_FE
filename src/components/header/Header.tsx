@@ -10,7 +10,7 @@ import { Dropdown } from "@/components";
 
 export const Header = () => {
   const { styles } = useStyles();
-  const { user } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.auth.data);
   const { theme } = useAppSelector((state) => state.setting);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -19,8 +19,8 @@ export const Header = () => {
     {
       key: path.user,
       label: "Profile",
-      icon: <User />,
-      onClick: () => navigate(`/${user?.id}`),
+      icon: <User variant="TwoTone" />,
+      onClick: () => navigate(`/user/${user?.id}`),
     },
     { type: "divider" },
     {
@@ -28,13 +28,13 @@ export const Header = () => {
         ? {
             key: "theme",
             label: "Dark mode",
-            icon: <Moon />,
+            icon: <Moon variant="TwoTone" />,
             onClick: () => dispatch(setTheme("dark")),
           }
         : {
             key: "theme",
             label: "Light mode",
-            icon: <Sun1 />,
+            icon: <Sun1 variant="TwoTone" />,
             onClick: () => dispatch(setTheme("light")),
           }),
     },
@@ -59,7 +59,7 @@ export const Header = () => {
             <h4>{user?.name}</h4>
             <span>{user?.email}</span>
           </div>
-          <ArrowDown2 size="20" />
+          <ArrowDown2 size="20" variant="TwoTone" />
         </div>
       </Dropdown>
     </Layout.Header>

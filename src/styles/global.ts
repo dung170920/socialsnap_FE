@@ -50,6 +50,10 @@ export default createGlobalStyle`
     border: 0;
   }
 
+  ul {
+    list-style: none;
+  }
+
   ${({ theme }) => css`
     a {
       color: ${theme.colorPrimary};

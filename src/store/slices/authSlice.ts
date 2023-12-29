@@ -1,37 +1,40 @@
-import { LoginRequest, RegisterRequest } from "@/types";
+import { LoginRequest, RegisterRequest, User } from "@/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { setUser } from "./userSlice";
 import { loginApi, registerApi } from "@/apis";
 import { handleBadRequestError } from "@/utils";
 
 export interface AuthSlice {
-  accessToken: string | null;
-  refreshToken: string | null;
+  data: {
+    accessToken: string | null;
+    refreshToken: string | null;
+    user: User | null;
+  };
   loading: boolean;
 }
 
 const initialState: AuthSlice = {
-  accessToken: null,
-  refreshToken: null,
+  data: {
+    accessToken: null,
+    refreshToken: null,
+    user: null,
+  },
   loading: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.data = initialState.data;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
+      state.data = action.payload;
     });
     builder.addCase(register.fulfilled, (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
-    });
-    builder.addCase(logout.fulfilled, (state) => {
-      state.accessToken = null;
-      state.refreshToken = null;
+      state.data = action.payload;
     });
     builder.addMatcher(
       (action) => action.type === "string",
@@ -42,42 +45,27 @@ const authSlice = createSlice({
   },
 });
 
-export const login = createAsyncThunk(
-  "auth/login",
-  async (loginPayload: LoginRequest, { dispatch, rejectWithValue }) => {
-    return loginApi(loginPayload)
-      .then((res) => {
-        const data = res.data.result!;
-
-        dispatch(setUser(data.user));
-
-        return {
-          accessToken: data.accessToken,
-          refreshToken: data.refreshToken,
-        };
-      })
-      .catch((error) => {
-        if (handleBadRequestError(error)) {
-          return rejectWithValue(error.response?.data.errors);
-        }
-        throw error;
-      });
-  }
-);
+export const login = createAsyncThunk("auth/login", async (loginPayload: LoginRequest, { rejectWithValue }) => {
+  return loginApi(loginPayload)
+    .then((res) => {
+      const data = res.data.result!;
+      return data;
+    })
+    .catch((error) => {
+      if (handleBadRequestError(error)) {
+        return rejectWithValue(error.response?.data.errors);
+      }
+      throw error;
+    });
+});
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (registerPayload: RegisterRequest, { dispatch, rejectWithValue }) =>
+  async (registerPayload: RegisterRequest, { rejectWithValue }) =>
     registerApi(registerPayload)
       .then((res) => {
         const data = res.data.result!;
-
-        dispatch(setUser(data.user));
-
-        return {
-          accessToken: data.accessToken,
-          refreshToken: data.refreshToken,
-        };
+        return data;
       })
       .catch((error) => {
         if (handleBadRequestError(error)) {
@@ -87,8 +75,6 @@ export const register = createAsyncThunk(
       })
 );
 
-export const logout = createAsyncThunk("auth/doLogout", (_, { dispatch }) => {
-  dispatch(setUser(null));
-});
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

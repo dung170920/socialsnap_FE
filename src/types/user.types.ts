@@ -1,4 +1,4 @@
-export enum VerifyStatus {
+export enum UserStatus {
   Actived,
   Banned,
 }
@@ -7,8 +7,14 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  created_at: string;
-  updated_at: string;
-  verify: VerifyStatus;
+  dateOfBirth?: Date;
+  password?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  status: UserStatus;
+  bio?: string;
   avatar?: string;
+  coverPhoto?: string;
 }
+
+export interface UserRequest {}
