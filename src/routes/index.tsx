@@ -19,29 +19,46 @@ const Loadable = () => (
   </Suspense>
 );
 
+const AuthRoutes = ({ isAuth, children }: { isAuth: boolean; children: React.ReactNode }) => {
+  return !isAuth ? <>{children}</> : <Navigate to={path.home} replace />;
+};
+
+const ProtectedRoutes = ({ isAuth, children }: { isAuth: boolean; children: React.ReactNode }) => {
+  return isAuth ? <>{children}</> : <Navigate to={path.signIn} replace />;
+};
+
 export const Router = () => {
   const { accessToken } = useAppSelector((state) => state.auth.data);
 
   return (
     <Routes>
-      <Route path="/" element={<Loadable />}>
-        {accessToken ? (
-          <Route element={<MainLayout />}>
-            <Route path={path.home} element={<Home />} />
-            <Route path={path.explore} element={<Explore />} />
-            <Route path={path.bookmarks} element={<Bookmarks />} />
-            <Route path={path.user}>
-              <Route index element={<Navigate to={path.notFound} replace />} />
-              <Route path=":userId" element={<User />} />
-            </Route>
-            <Route path="*" element={<Navigate to={path.notFound} replace />} />
+      <Route path="" element={<Loadable />}>
+        <Route
+          element={
+            <AuthRoutes isAuth={!!accessToken}>
+              <AuthLayout />
+            </AuthRoutes>
+          }
+        >
+          <Route path={path.signIn} element={<SignIn />} />
+          <Route path={path.signUp} element={<SignUp />} />
+        </Route>
+        <Route
+          element={
+            <ProtectedRoutes isAuth={!!accessToken}>
+              <MainLayout />
+            </ProtectedRoutes>
+          }
+        >
+          <Route path={path.home} element={<Home />} />
+          <Route path={path.explore} element={<Explore />} />
+          <Route path={path.bookmarks} element={<Bookmarks />} />
+          <Route path={path.user}>
+            <Route index element={<Navigate to={path.notFound} replace />} />
+            <Route path=":userId" element={<User />} />
           </Route>
-        ) : (
-          <Route element={<AuthLayout />}>
-            <Route path={path.signIn} element={<SignIn />} />
-            <Route path={path.signUp} element={<SignUp />} />
-          </Route>
-        )}
+        </Route>
+        <Route path="*" element={<Navigate to={path.notFound} replace />} />
         <Route path={path.notFound} element={<NotFound />} />
       </Route>
     </Routes>

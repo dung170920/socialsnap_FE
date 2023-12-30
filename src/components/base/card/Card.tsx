@@ -1,14 +1,16 @@
-import { CardProps } from "antd";
+import { Card as AntdCard, CardProps } from "antd";
 import { useStyles } from "./Card.styles";
 
-export interface ICardProps extends CardProps {}
+export interface ICardProps extends CardProps {
+  className?: string;
+}
 
-export const Card = ({ children, ...props }: ICardProps) => {
-  const { styles } = useStyles();
+export const Card = ({ children, className, ...props }: ICardProps) => {
+  const { styles, cx } = useStyles();
 
   return (
-    <Card className={styles.card} {...props}>
+    <AntdCard className={cx(styles.card, className)} {...props}>
       {children}
-    </Card>
+    </AntdCard>
   );
 };
