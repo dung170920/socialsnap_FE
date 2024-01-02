@@ -4,7 +4,7 @@ export const path = {
   logout: "logout",
   home: "",
   explore: "explore",
-  bookmarks: "bookmarks",
+  saved: "saved",
   user: "user",
   notFound: "not-found",
 };

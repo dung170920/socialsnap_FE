@@ -13,8 +13,8 @@ export const sidebarLinks = [
     icon: LocationDiscover,
   },
   {
-    key: path.bookmarks,
-    title: "Bookmarks",
+    key: path.saved,
+    title: "Saved",
     icon: Bookmark,
   },
 ];

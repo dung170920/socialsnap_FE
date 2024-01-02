@@ -5,11 +5,11 @@ export interface IButtonProps extends ButtonProps {
   children: React.ReactNode;
 }
 
-export const Button = ({ size = "middle", children, ...props }: IButtonProps) => {
+export const Button = ({ className, size = "middle", children, ...props }: IButtonProps) => {
   const { styles, cx } = useStyles();
   return (
     <AntdButton
-      className={cx(styles.button, size === "large" && styles.buttonLg, size === "small" && styles.buttonSm)}
+      className={cx(styles.button, size === "large" && styles.buttonLg, size === "small" && styles.buttonSm, className)}
       {...props}
     >
       {children}
