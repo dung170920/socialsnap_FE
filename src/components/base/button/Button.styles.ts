@@ -2,6 +2,8 @@ import { createStyles } from "antd-style";
 
 export const useStyles = createStyles(() => ({
   button: {
+    display: "flex",
+    alignItems: "center",
     fontSize: "16px",
     height: "48px",
     boxShadow: "none",

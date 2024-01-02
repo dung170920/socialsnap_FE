@@ -63,6 +63,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     flex: 1;
     background-color: ${token.colorBgBase};
     border-radius: ${token.borderRadius}px;
+    height: fit-content;
     padding: 24px;
 
     h4 {

@@ -1,4 +1,4 @@
-import { CreatePost } from "@/components";
+import { CreatePost, Post } from "@/components";
 import { useStyles } from "./Home.styles";
 
 const Home = () => {
@@ -9,9 +9,9 @@ const Home = () => {
       <div className={styles.left}>
         <CreatePost />
         <div className={styles.posts}>
-          <span>1</span>
-          <span>1</span>
-          <span>1</span>
+          <Post />
+          <Post />
+          <Post />
         </div>
       </div>
       <div className={styles.right}>Right</div>

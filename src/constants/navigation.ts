@@ -1,5 +1,5 @@
 import { Home, LocationDiscover, Bookmark } from "iconsax-react";
-import { path } from ".";
+import { path } from "@/constants";
 
 export const sidebarLinks = [
   {
