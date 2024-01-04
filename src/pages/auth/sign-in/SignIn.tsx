@@ -1,5 +1,5 @@
 import { useStyles } from "./SignIn.styles";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Input } from "@/components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,7 @@ import { LoginRequest } from "@/types";
 import { login } from "@/store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { Form } from "antd";
+import { path } from "@/constants";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is a required field").email(),
@@ -21,7 +22,6 @@ const defaultValues = {
 
 const SignIn = () => {
   const { styles } = useStyles();
-  const navigate = useNavigate();
   const loading = useAppSelector((state) => state.auth.loading) as boolean;
   const dispatch = useAppDispatch();
   const { handleSubmit, control, setError } = useForm<LoginRequest>({
@@ -31,7 +31,6 @@ const SignIn = () => {
   const onSubmit = handleSubmit((data) => {
     dispatch(login(data))
       .unwrap()
-      .then(() => navigate("/"))
       .catch((err) => {
         Object.keys(err).forEach((key) =>
           setError(key as keyof LoginRequest, {
@@ -53,7 +52,7 @@ const SignIn = () => {
           Sign In
         </Button>
         <p>
-          Don’t have an account? <Link to="/sign-up">Sign up</Link>
+          Don’t have an account? <Link to={`/${path.signUp}`}>Sign up</Link>
         </p>
       </div>
     </Form>

@@ -1,10 +1,13 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useStyles } from "./User.styles";
 import { Avatar } from "antd";
 import { CreatePost, Post } from "@/components";
 import { Cake } from "iconsax-react";
+import { useAppSelector } from "@/store";
+import { path } from "@/constants";
 
 const User = () => {
+  const { user } = useAppSelector((state) => state.auth.data);
   const { styles } = useStyles();
   const { userId } = useParams();
 
@@ -19,6 +22,7 @@ const User = () => {
             <span className={styles.subTitle}>0 followers</span>
           </div>
         </div>
+        {user?.id === userId && <Link to={path.home}>Edit Profile</Link>}
       </div>
 
       <div className={styles.content}>

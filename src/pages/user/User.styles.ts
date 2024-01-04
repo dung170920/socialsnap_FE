@@ -41,6 +41,17 @@ export const useStyles = createStyles(({ css, token }) => ({
       height: 100%;
       object-fit: cover;
     }
+
+    a {
+      border-radius: ${token.borderRadius}px;
+      background-color: rgba(23, 23, 37, 0.5);
+      border: 1px solid white;
+      padding: 12px 16px;
+      position: absolute;
+      color: white;
+      right: 20px;
+      top: 20px;
+    }
   `,
 
   title: {

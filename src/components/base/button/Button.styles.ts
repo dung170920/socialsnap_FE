@@ -4,6 +4,7 @@ export const useStyles = createStyles(() => ({
   button: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     fontSize: "16px",
     height: "48px",
     boxShadow: "none",

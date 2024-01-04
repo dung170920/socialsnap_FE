@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useStyles } from "./SignUp.styles";
 import { Button, Input } from "@/components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { path } from "@/constants";
 import { RegisterRequest } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/store";
@@ -36,7 +36,6 @@ const defaultValues = {
 
 const SignUp = () => {
   const { styles } = useStyles();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const loading = useAppSelector((state) => state.auth.loading) as boolean;
   const { handleSubmit, control, setError } = useForm<RegisterRequest>({
@@ -46,7 +45,6 @@ const SignUp = () => {
   const onSubmit = handleSubmit((data) => {
     dispatch(register(data))
       .unwrap()
-      .then(() => navigate("/"))
       .catch((err) => {
         Object.keys(err).forEach((key) =>
           setError(key as keyof RegisterRequest, {
@@ -73,7 +71,7 @@ const SignUp = () => {
           Sign Up
         </Button>
         <p>
-          Already have an account? <Link to={path.signIn}>Sign in</Link>
+          Already have an account? <Link to={`/${path.signIn}`}>Sign in</Link>
         </p>
       </div>
     </Form>

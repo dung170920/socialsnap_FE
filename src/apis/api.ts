@@ -9,7 +9,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const accessToken = store.getState().auth.accessToken;
+  const accessToken = store.getState().auth.data.accessToken;
   if (accessToken) {
     config.headers.set("Authorization", `Bearer ${accessToken}`);
   }
@@ -22,8 +22,8 @@ api.interceptors.response.use(
     return response;
   },
   function (error: AxiosError) {
-    if (error.response?.status !== 400) {
-      const data: any = error.response?.data;
+    const data: any = error.response?.data;
+    if (!data.errors) {
       message.error({
         content: data?.message || error.message,
         duration: 3,

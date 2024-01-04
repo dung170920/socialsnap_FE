@@ -2,6 +2,7 @@ import { createStyles } from "antd-style";
 
 export const useStyles = createStyles(({ css, token }) => ({
   notFound: css`
+    background-color: ${token.colorBgContainer};
     height: 100vh;
     width: 100%;
     display: flex;
@@ -11,6 +12,7 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
 
   header: css`
+    color: ${token.colorText};
     font-size: 128px;
     font-weight: bold;
     letter-spacing: 0.1em;

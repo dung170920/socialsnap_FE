@@ -7,7 +7,7 @@ export const useStyles = createStyles(() => ({
   },
 
   left: {
-    flex: 1,
+    flex: 2,
     overflowY: "scroll",
   },
 
